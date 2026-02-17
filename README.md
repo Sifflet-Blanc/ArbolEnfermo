@@ -9,3 +9,5 @@ de drones afin de déterminer l’étendue des zones touchées.
 Il s’agit donc d’un problème de détection d’objets ou il faut classer les
 arbres en 4 catégories : Healthy (H), Light Damage (LD), High Damage
 (HD), and Other.
+
+[Lien vers le data set](https://lila.science/datasets/forest-damages-larch-casebearer/)
