@@ -5,6 +5,7 @@ import os
 import re
 import random as rd
 import shutil
+from pathlib import Path
 
 def purge_data(folder):
     for file in os.listdir(folder):
@@ -108,11 +109,14 @@ for drone_survey in os.listdir("data/Data_Set_Larch_Casebearer/"):
                     df.to_csv(r'data/labels/'+data_set+"/"+anotation.replace(".xml", "")+'.txt', header=None, index=None, sep=' ', mode='w')
 
 
+save_dir = Path("/home/arbremalade/ArbolEnfermo/runs/train")
+save_dir.mkdir(parents=True, exist_ok=True)
+
 print("Training...")
 model = YOLO("yolo12n.pt")
 results = model.train(data="data/data.yaml", 
     epochs=100, 
     imgsz=1500,
-    project="/home/arbremalade/ArbolEnfermo/runs/",
-    name="train")
-model.export(imgsz=(1500, 1500), save=True, name='train')
+    project=str(save_dir.parent),
+    name=save_dir.name)
+model.export(imgsz=(1500, 1500), save=True, name='train', format="onnx")
