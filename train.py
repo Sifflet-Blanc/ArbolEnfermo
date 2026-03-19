@@ -110,5 +110,9 @@ for drone_survey in os.listdir("data/Data_Set_Larch_Casebearer/"):
 
 print("Training...")
 model = YOLO("yolo12n.pt")
-results = model.train(data="data/data.yaml", epochs=100, imgsz=1500)
-model.export(imgsz=(1500, 1500), save=True, name='my_custom_model')
+results = model.train(data="data/data.yaml", 
+    epochs=100, 
+    imgsz=1500,
+    project="./runs",
+    name="train")
+model.export(imgsz=(1500, 1500), save=True, name='train')
