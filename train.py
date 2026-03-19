@@ -28,7 +28,8 @@ def damage_to_class(damage):
         return 2
     else:
         return 3
-    
+
+print("Clean des dossiers...")
 if not os.path.exists("data/images"):
     os.makedirs("data/images")
 if not os.path.exists("data/labels"):
@@ -48,6 +49,7 @@ purge_data("data/labels/train")
 purge_data("data/labels/val")
 
 
+print("Compilation du dataset...")
 folder = "data/Data_Set_Larch_Casebearer/Bebehojd_20190527/Annotations/"
 
 base_path = "data/Data_Set_Larch_Casebearer/"
@@ -106,6 +108,7 @@ for drone_survey in os.listdir("data/Data_Set_Larch_Casebearer/"):
                     df.to_csv(r'data/labels/'+data_set+"/"+anotation.replace(".xml", "")+'.txt', header=None, index=None, sep=' ', mode='w')
 
 
+print("Training...")
 model = YOLO("yolo12n.pt")
 results = model.train(data="data/data.yaml", epochs=100, imgsz=1500)
 model.export(imgsz=(1500, 1500), save=True, name='my_custom_model')
