@@ -125,6 +125,7 @@ model.to(device)  # Move model to GPU 1
 results = model.train(data="data/data.yaml", 
     epochs=100, 
     imgsz=1500,
+    batch=16,
     project=str(save_dir.parent),
     name=save_dir.name)
 model.export(imgsz=(1500, 1500), save=True, name='train', format="onnx")
