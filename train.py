@@ -114,7 +114,7 @@ save_dir.mkdir(parents=True, exist_ok=True)
 
 
 os.environ["YOLO_WEIGHTS_DIR"] = "weights"
-settings.update({"weights_dir": Path("weights")})
+settings.update({"weights_dir": "weights"})
 
 print("Training...")
 model = YOLO("yolo12n.pt")
