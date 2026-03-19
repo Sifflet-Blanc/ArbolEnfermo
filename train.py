@@ -12,9 +12,6 @@ def purge_data(folder):
             os.remove(folder+'/'+file)
 
 
-folder = "data/Data_Set_Larch_Casebearer/Bebehojd_20190527/Annotations/"
-
-
 def parse_bndbox(bndbox_str):
     xmin = re.search(r'<xmin>(.*?)</xmin>', bndbox_str).group(1)
     ymin = re.search(r'<ymin>(.*?)</ymin>', bndbox_str).group(1)
@@ -31,11 +28,27 @@ def damage_to_class(damage):
         return 2
     else:
         return 3
+    
+if not os.path.exists("data/images"):
+    os.makedirs("data/images")
+if not os.path.exists("data/labels"):
+    os.makedirs("data/labels")
+if not os.path.exists("data/images/train"):
+    os.makedirs("data/images/train")
+if not os.path.exists("data/images/val"):
+    os.makedirs("data/images/val")
+if not os.path.exists("data/labels/train"):
+    os.makedirs("data/labels/train")
+if not os.path.exists("data/labels/val"):
+    os.makedirs("data/labels/val")
 
 purge_data("data/images/train")
 purge_data("data/images/val")
 purge_data("data/labels/train")
 purge_data("data/labels/val")
+
+
+folder = "data/Data_Set_Larch_Casebearer/Bebehojd_20190527/Annotations/"
 
 base_path = "data/Data_Set_Larch_Casebearer/"
 for drone_survey in os.listdir("data/Data_Set_Larch_Casebearer/"):
@@ -91,7 +104,7 @@ for drone_survey in os.listdir("data/Data_Set_Larch_Casebearer/"):
                     df = df[["class", "x_center", "y_center", "width", "height"]]
                 
                     df.to_csv(r'data/labels/'+data_set+"/"+anotation.replace(".xml", "")+'.txt', header=None, index=None, sep=' ', mode='w')
-                    
+
 
 model = YOLO("yolo12n.pt")
 results = model.train(data="data/data.yaml", epochs=100, imgsz=1500)
