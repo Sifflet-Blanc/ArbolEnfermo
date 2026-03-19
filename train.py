@@ -6,6 +6,7 @@ import re
 import random as rd
 import shutil
 from pathlib import Path
+import torch
 
 def purge_data(folder):
     for file in os.listdir(folder):
@@ -118,6 +119,9 @@ settings.update({"weights_dir": "weights"})
 
 print("Training...")
 model = YOLO("yolo12n.pt")
+device = torch.device("cuda:1")
+model.to(device)  # Move model to GPU 1
+
 results = model.train(data="data/data.yaml", 
     epochs=100, 
     imgsz=1500,
