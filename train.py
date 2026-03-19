@@ -1,4 +1,4 @@
-from ultralytics import YOLO
+from ultralytics import YOLO, settings
 import xml.etree.ElementTree as ET
 import pandas as pd
 import os
@@ -109,8 +109,12 @@ for drone_survey in os.listdir("data/Data_Set_Larch_Casebearer/"):
                     df.to_csv(r'data/labels/'+data_set+"/"+anotation.replace(".xml", "")+'.txt', header=None, index=None, sep=' ', mode='w')
 
 
-save_dir = Path("/home/arbremalade/ArbolEnfermo/runs/train")
+save_dir = Path("runs/train")
 save_dir.mkdir(parents=True, exist_ok=True)
+
+
+os.environ["YOLO_WEIGHTS_DIR"] = "weights"
+settings.update({"weights_dir": Path("weights")})
 
 print("Training...")
 model = YOLO("yolo12n.pt")
