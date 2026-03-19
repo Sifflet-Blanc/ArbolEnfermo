@@ -113,6 +113,6 @@ model = YOLO("yolo12n.pt")
 results = model.train(data="data/data.yaml", 
     epochs=100, 
     imgsz=1500,
-    project="./runs",
+    project="runs/",
     name="train")
 model.export(imgsz=(1500, 1500), save=True, name='train')
