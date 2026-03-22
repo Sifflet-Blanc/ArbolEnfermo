@@ -8,6 +8,8 @@ import shutil
 from pathlib import Path
 import torch
 
+rd.seed(0)
+
 def purge_data(folder):
     for file in os.listdir(folder):
         if file != ".gitingore":
@@ -52,7 +54,6 @@ purge_data("data/labels/val")
 
 
 print("Compilation du dataset...")
-folder = "data/Data_Set_Larch_Casebearer/Bebehojd_20190527/Annotations/"
 
 base_path = "data/Data_Set_Larch_Casebearer/"
 for drone_survey in os.listdir("data/Data_Set_Larch_Casebearer/"):
@@ -102,9 +103,11 @@ for drone_survey in os.listdir("data/Data_Set_Larch_Casebearer/"):
                     
                     df["width"] = (df["xmax"] - df["xmin"]) / width
                     df["height"] = (df["ymax"] - df["ymin"]) / height
-                    df["x_center"] = df["xmin"] / width + df["width"]
-                    df["y_center"] = df["ymin"] / height + df["height"]
+                    df["x_center"] = df["xmin"] / width + df["width"]/2
+                    df["y_center"] = df["ymin"] / height + df["height"]/2
                 
+                    #df[["class", "xmin", "xmax", "ymin", "ymax"]].to_csv(r'data/labels/'+data_set+"/"+anotation.replace(".xml", "")+'.txt', header=None, index=None, sep=' ', mode='w')
+
                     df = df[["class", "x_center", "y_center", "width", "height"]]
                 
                     df.to_csv(r'data/labels/'+data_set+"/"+anotation.replace(".xml", "")+'.txt', header=None, index=None, sep=' ', mode='w')
