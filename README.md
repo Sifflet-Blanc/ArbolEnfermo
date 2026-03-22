@@ -11,3 +11,16 @@ arbres en 4 catégories : Healthy (H), Light Damage (LD), High Damage
 (HD), and Other.
 
 [Lien vers le data set](https://lila.science/datasets/forest-damages-larch-casebearer/)
+
+# Mise en route 
+Test du model dans le notebook `main.ipynb`
+
+Si vous voulez entrainer le model vous même :
+```
+cd data
+curl https://storage.googleapis.com/public-datasets-lila/larch-casebearer/Data_Set_Larch_Casebearer.zip --output data.zip
+unzip data.zip
+rm data.zip
+cd ../
+python3 train.py
+```
