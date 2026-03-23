@@ -1,6 +1,4 @@
-/runs
 /train_data_visualizations
-!/runs/detect/train
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
